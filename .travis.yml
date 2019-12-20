@@ -8,4 +8,19 @@ before_install:
 
 
 script:
-        - docker run -e CI=true sagarawale/docker-aws-demo npm run test
+    - docker run -e CI=true sagarawale/docker-aws-demo npm run test
+
+
+deploy:
+    provider: elasticbeanstalk
+    region: "ap-south-1"
+    app: "docker-aws-demo"
+    env: "DockerAwsDemo-env"
+    bucket_name: elasticbeanstalk-ap-south-1-526829933297
+    bucket_path: docker-aws-demo
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key:
+        secure: "$AWS_SECRET_KEY"
+
