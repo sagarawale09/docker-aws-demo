@@ -1,0 +1,11 @@
+sudo: required
+services:
+    - docker
+
+
+before_install:
+    - docker build -t sagarawale/docker-aws-demo -f Dockerfile.dev .
+
+
+script:
+        - docker run -e CI=true sagarawale/docker-aws-demo npm run test
